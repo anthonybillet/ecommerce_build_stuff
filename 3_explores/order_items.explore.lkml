@@ -1,5 +1,5 @@
 include: "/1_base_dont_edit/**.view"
-include: "/2_refinements_edit/**.view"
+include: "/2_refinements/**/**.view"
 
 explore: order_items {
   label: "(1) Orders, Items and Users"
