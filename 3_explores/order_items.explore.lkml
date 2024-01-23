@@ -12,6 +12,7 @@ explore: order_items {
     relationship: one_to_one
     sql_on: ${inventory_items.id} = ${order_items.inventory_item_id} ;;
   }
+
   join: users {
     view_label: "Users"
     type: left_outer
@@ -31,5 +32,10 @@ explore: order_items {
     type: left_outer
     sql_on: ${distribution_centers.id} = ${inventory_items.product_distribution_center_id} ;;
     relationship: many_to_one
+  }
+
+  join: pop_any_two_periods {
+    relationship: one_to_one
+    sql:  ;;
   }
 }
