@@ -42,9 +42,9 @@ view: pop_any_two_periods {
     type: number
     sql: CASE
               WHEN {% condition select_period %} ${order_items.created_raw} {% endcondition %}
-                THEN DATE_DIFF(${order_items.created_raw},{% date_start select_period %}, DAY)
+                THEN DATE_DIFF(${order_items.created_raw},{% date_start select_period %}, DAY) +1
               WHEN {% condition compare_period %} ${order_items.created_raw} {% endcondition %}
-                THEN DATE_DIFF(${order_items.created_raw},{% date_start compare_period %}, DAY)
+                THEN DATE_DIFF(${order_items.created_raw},{% date_start compare_period %}, DAY) + 1
               ELSE NULL END;;
   }
 
