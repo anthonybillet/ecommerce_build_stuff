@@ -1,9 +1,9 @@
 connection: "sample_bigquery_connection"
 
-include: "/1_base_dont_edit/*.view.lkml"
-include: "/2_refinements/**/**.view.lkml"
-include: "/3_explores/*.explore.lkml"
-include: "/4_dashboards/**.dashboard.lookml"
+include: "/1_ecomm_demo/1_base_dont_edit/*.view.lkml"
+include: "/1_ecomm_demo/2_refinements/**/**.view.lkml"
+include: "/1_ecomm_demo/3_explores/*.explore.lkml"
+include: "/1_ecomm_demo/4_dashboards/**.dashboard.lookml"
 
 label: "2) Ecommerce Build Stuff"
 

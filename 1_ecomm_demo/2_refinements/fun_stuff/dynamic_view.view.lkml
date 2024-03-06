@@ -1,5 +1,5 @@
-include: "/1_base_dont_edit/inventory_items.view.lkml"
-include: "/1_base_dont_edit/users.view.lkml"
+include: "/1_ecomm_demo/1_base_dont_edit/inventory_items.view.lkml"
+include: "/1_ecomm_demo/1_base_dont_edit/users.view.lkml"
 
 view: dynamic_view {
   # extends: [inventory_items,users]

@@ -1,5 +1,5 @@
-include: "/1_base_dont_edit/**.view"
-include: "/2_refinements/**/**.view"
+include: "/1_ecomm_demo/1_base_dont_edit/**.view"
+include: "/1_ecomm_demo/2_refinements/**/**.view"
 
 explore: dynamic_view {
   label: "Dynamic Base Table Explore"

@@ -1,5 +1,5 @@
-include: "/1_base_dont_edit/order_items.view.lkml"
-include: "/2_refinements/order_items_refinements.view.lkml"
+include: "/1_ecomm_demo/1_base_dont_edit/order_items.view.lkml"
+include: "/1_ecomm_demo/2_refinements/order_items_refinements.view.lkml"
 
 view: pop_any_two_periods {
   view_label: "Z) Period over Period Analysis"
