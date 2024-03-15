@@ -38,4 +38,10 @@ explore: order_items {
     relationship: one_to_one
     sql:  ;;
   }
+
+  join: rank_top_brands {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${products.brand} = ${rank_top_brands.brand_ranked} ;;
+  }
 }
