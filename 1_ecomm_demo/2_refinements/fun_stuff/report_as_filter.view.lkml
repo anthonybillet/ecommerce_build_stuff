@@ -1,7 +1,9 @@
 include: "/1_ecomm_demo/2_refinements/products_refinements.view.lkml"
 
 view: +products {
-  dimension: is_sku_sold_yesterday {
+
+
+ dimension: is_sku_sold_yesterday {
     view_label: "Z) Report as Filter "
     type: yesno
     sql:  ${sku} IN (SELECT

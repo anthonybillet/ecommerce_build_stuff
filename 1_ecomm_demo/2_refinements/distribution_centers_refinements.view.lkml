@@ -41,6 +41,7 @@ view: +inventory_items {
     sql: ${sold_raw} is not null ;;
   }
 
+
   dimension: days_in_inventory {
     label: "Days in Inventory"
     description: "days between created and sold date"
