@@ -44,4 +44,16 @@ explore: order_items {
     relationship: one_to_many
     sql_on: ${products.brand} = ${rank_top_brands.brand_ranked} ;;
   }
+
+  join: user_facts_ndt {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_facts_ndt.user_id} ;;
+  }
+
+  join: user_facts_sdt {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${users.id} = ${user_facts_sdt.user_id} ;;
+  }
 }
