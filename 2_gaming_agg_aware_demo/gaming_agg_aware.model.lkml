@@ -36,7 +36,7 @@ explore: events_w_agg_awareness {
   aggregate_table: rollup__event_date {
     query: {
       dimensions: [event_date]
-      measures: [count]
+      measures: [count,events.total_d30_revenue]
       timezone: "America/Los_Angeles"
     }
 

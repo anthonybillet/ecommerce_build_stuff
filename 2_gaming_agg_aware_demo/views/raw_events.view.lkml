@@ -2,6 +2,8 @@ view: raw_events {
   sql_table_name: `looker-private-demo.gaming.raw_events` ;;
   view_label: "Events"
 
+  drill_fields: [unique_event_id, event_name, game_name, game_version, event_time,country, user_id, device_platform, iap_revenue, ad_revenue]
+
   dimension: ad_network {
     type: string
     sql: ${TABLE}.ad_network ;;
@@ -54,7 +56,7 @@ view: raw_events {
   }
   dimension_group: event {
     type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
+    timeframes: [raw, time, hour, date, week, month, quarter, year]
     sql: ${TABLE}.event ;;
   }
   dimension: event_name {
@@ -105,6 +107,7 @@ view: raw_events {
     sql: ${TABLE}.region ;;
   }
   dimension: unique_event_id {
+    primary_key: yes
     type: string
     sql: ${TABLE}.unique_event_id ;;
   }
@@ -191,7 +194,7 @@ view: raw_events {
     type: count_distinct
     sql: ${user_id};;
     value_format_name: large_number
-    drill_fields: [drill_field,number_of_users]
+    # drill_fields: [drill_field,number_of_users]
   }
 
   measure: number_of_new_users {
@@ -204,7 +207,7 @@ view: raw_events {
       value: "0"
     }
     value_format_name: large_number
-    drill_fields: [drill_field,number_of_new_users]
+    # drill_fields: [drill_field,number_of_new_users]
   }
 
   measure: number_of_paid_users {
@@ -217,10 +220,8 @@ view: raw_events {
       value: "paid"
     }
     value_format_name: large_number
-    drill_fields: [drill_field,number_of_paid_users]
+    # drill_fields: [drill_field,number_of_paid_users]
   }
-
-
 
 # Event Counts
 
@@ -229,7 +230,23 @@ view: raw_events {
     label: "Number of Events"
     type: count
     value_format_name: large_number
-    drill_fields: [drill_field,count]
+    # drill_fields: [drill_field,count]
+    link: {
+      label: "Breakdown by Country"
+      url: "{{link}}&fields=events.country,events.count"
+    }
+    link: {
+      label: "Breakdown by Game"
+      url: "{{link}}&fields=events.game_name,events.count"
+    }
+    link: {
+      label: "Breakdown by Game Version"
+      url: "{{link}}&fields=events.game_version,events.count"
+    }
+    link: {
+      label: "Breakdown by Device Platform"
+      url: "{{link}}&fields=events.device_platform,events.count"
+    }
   }
 
   measure: number_of_ads_shown {
@@ -239,7 +256,7 @@ view: raw_events {
       field: event_name
       value: "Ad_Watched"
     }
-    drill_fields: [drill_field,count]
+    # drill_fields: [drill_field,count]
   }
 
   measure: ads_shown_per_user {
@@ -248,7 +265,7 @@ view: raw_events {
     type: number
     value_format_name: decimal_2
     sql: 1.0 * ${number_of_ads_shown} / NULLIF(${number_of_users},0) ;;
-    drill_fields: [drill_field,ads_shown_per_user]
+    # drill_fields: [drill_field,ads_shown_per_user]
   }
 
 # Misc
@@ -286,7 +303,7 @@ view: raw_events {
       field: retention_day
       value: "1"
     }
-    drill_fields: [drill_field,d1_retained_users]
+    # drill_fields: [drill_field,d1_retained_users]
   }
 
   measure: d1_eligible_users {
@@ -307,7 +324,7 @@ view: raw_events {
     value_format_name: percent_2
     type: number
     sql: 1.0 * ${d1_retained_users}/ NULLIF(${d1_eligible_users},0);;
-    drill_fields: [drill_field,d1_retention_rate]
+    # drill_fields: [drill_field,d1_retention_rate]
   }
 
   # D7
@@ -320,7 +337,7 @@ view: raw_events {
       field: retention_day
       value: "7"
     }
-    drill_fields: [drill_field,d7_retained_users]
+    # drill_fields: [drill_field,d7_retained_users]
   }
 
   measure: d7_eligible_users {
@@ -333,7 +350,7 @@ view: raw_events {
       field: days_since_user_signup
       value: ">7"
     }
-    drill_fields: [drill_field,d7_eligible_users]
+    # drill_fields: [drill_field,d7_eligible_users]
   }
 
   measure: d7_retention_rate {
@@ -342,7 +359,7 @@ view: raw_events {
     value_format_name: percent_2
     type: number
     sql: 1.0 * ${d7_retained_users}/ NULLIF(${d7_eligible_users},0);;
-    drill_fields: [drill_field,d7_retention_rate]
+    # drill_fields: [drill_field,d7_retention_rate]
   }
 
   # D14
@@ -355,7 +372,7 @@ view: raw_events {
       field: retention_day
       value: "14"
     }
-    drill_fields: [drill_field,d14_retained_users]
+    # drill_fields: [drill_field,d14_retained_users]
   }
 
   measure: d14_eligible_users {
@@ -368,7 +385,7 @@ view: raw_events {
       field: days_since_user_signup
       value: ">14"
     }
-    drill_fields: [drill_field,d14_eligible_users]
+    # drill_fields: [drill_field,d14_eligible_users]
   }
 
   measure: d14_retention_rate {
@@ -377,7 +394,7 @@ view: raw_events {
     value_format_name: percent_2
     type: number
     sql: 1.0 * ${d14_retained_users}/ NULLIF(${d14_eligible_users},0);;
-    drill_fields: [drill_field,d14_retention_rate]
+    # drill_fields: [drill_field,d14_retention_rate]
   }
 
   # D30
@@ -390,7 +407,7 @@ view: raw_events {
       field: retention_day
       value: "30"
     }
-    drill_fields: [drill_field,d30_retained_users]
+    # drill_fields: [drill_field,d30_retained_users]
   }
 
   measure: d30_eligible_users {
@@ -403,7 +420,7 @@ view: raw_events {
       field: days_since_user_signup
       value: ">30"
     }
-    drill_fields: [drill_field,d30_eligible_users]
+    # drill_fields: [drill_field,d30_eligible_users]
   }
 
   measure: d30_retention_rate {
@@ -412,7 +429,7 @@ view: raw_events {
     value_format_name: percent_2
     type: number
     sql: 1.0 * ${d30_retained_users}/ NULLIF(${d30_eligible_users},0);;
-    drill_fields: [drill_field,d30_retention_rate]
+    # drill_fields: [drill_field,d30_retention_rate]
   }
 
 # UA
@@ -424,7 +441,7 @@ view: raw_events {
     type: number
     sql: ${total_install_spend}/ NULLIF(${number_of_new_users},0) ;;
     value_format_name: large_usd
-    drill_fields: [drill_field,cost_per_install]
+    # drill_fields: [drill_field,cost_per_install]
   }
 
   measure: total_install_spend {
@@ -433,7 +450,7 @@ view: raw_events {
     type: sum
     sql: ${acquisition_cost} ;;
     value_format_name: large_usd
-    drill_fields: [drill_field,total_install_spend]
+    # drill_fields: [drill_field,total_install_spend]
   }
 
 
@@ -450,7 +467,7 @@ view: raw_events {
     {% elsif value > 1.0 %}
     <a style="color: green; font-size:100%" href="#drillmenu" target="_self">{{ rendered_value }}</a>
     {% endif %} ;;
-    drill_fields: [drill_field,total_install_spend,return_on_ad_spend,number_of_paid_users,total_revenue_from_paid_users,cost_per_install]
+    # drill_fields: [drill_field,total_install_spend,return_on_ad_spend,number_of_paid_users,total_revenue_from_paid_users,cost_per_install]
   }
 
 # Monetization
@@ -486,7 +503,7 @@ view: raw_events {
       field: is_iap_purchase
       value: "yes"
     }
-    drill_fields: [drill_field,total_iap_revenue]
+    # drill_fields: [drill_field,total_iap_revenue]
   }
 
   measure: transactions_per_spender {
@@ -495,7 +512,7 @@ view: raw_events {
     group_label: "Monetization"
     sql: 1.0 * ${number_of_iap_purchases}/nullif(${number_of_spenders},0) ;;
     value_format_name: decimal_2
-    drill_fields: [drill_field,transactions_per_spender]
+    # drill_fields: [drill_field,transactions_per_spender]
   }
 
   measure: total_iap_revenue {
@@ -505,7 +522,7 @@ view: raw_events {
     type: sum
     sql: ${iap_revenue} ;;
     value_format_name: large_usd
-    drill_fields: [drill_field,total_iap_revenue]
+    # drill_fields: [drill_field,total_iap_revenue]
   }
 
   measure: total_ad_revenue {
@@ -514,7 +531,7 @@ view: raw_events {
     type: sum
     sql: ${ad_revenue} ;;
     value_format_name: large_usd
-    drill_fields: [drill_field,total_ad_revenue]
+    # drill_fields: [drill_field,total_ad_revenue]
   }
 
   dimension: combined_revenue {
@@ -529,7 +546,7 @@ view: raw_events {
     type: sum
     sql: ${combined_revenue} ;;
     value_format_name: large_usd
-    drill_fields: [drill_field,total_revenue]
+    # drill_fields: [drill_field,total_revenue]
   }
 
   measure: total_revenue_after_UA {
@@ -539,7 +556,7 @@ view: raw_events {
     type: number
     sql: ${total_revenue} - ${total_install_spend}  ;;
     value_format_name: large_usd
-    drill_fields: [drill_field,total_revenue_after_UA]
+    # drill_fields: [drill_field,total_revenue_after_UA]
   }
 
   measure: total_revenue_from_paid_users {
@@ -552,7 +569,7 @@ view: raw_events {
       value: "paid"
     }
     value_format_name: large_usd
-    drill_fields: [drill_field,total_revenue]
+    # drill_fields: [drill_field,total_revenue]
   }
 
   measure: average_revenue {
@@ -561,7 +578,7 @@ view: raw_events {
     type: average
     sql: ${combined_revenue} ;;
     value_format_name: large_usd
-    drill_fields: [drill_field,average_revenue]
+    # drill_fields: [drill_field,average_revenue]
   }
 
   measure: number_of_spenders {
@@ -573,7 +590,7 @@ view: raw_events {
       field: is_paying_user
       value: "Yes"
     }
-    drill_fields: [drill_field,number_of_spenders]
+    # drill_fields: [drill_field,number_of_spenders]
   }
 
   measure: percent_spenders {
@@ -582,7 +599,7 @@ view: raw_events {
     type: number
     sql: 1.0 * ${number_of_spenders} / NULLIF(${number_of_users},0) ;;
     value_format_name: percent_2
-    drill_fields: [drill_field,percent_spenders]
+    # drill_fields: [drill_field,percent_spenders]
   }
 
   measure: average_revenue_per_spender {
@@ -592,7 +609,7 @@ view: raw_events {
     type: number
     sql: 1.0 * ${total_iap_revenue} / NULLIF(${number_of_spenders},0) ;;
     value_format_name: large_usd
-    drill_fields: [drill_field,average_revenue_per_spender]
+    # drill_fields: [drill_field,average_revenue_per_spender]
   }
 
   measure: average_revenue_per_user {
@@ -602,7 +619,7 @@ view: raw_events {
     type: number
     sql: 1.0 * ${total_revenue} / NULLIF(${number_of_users},0) ;;
     value_format_name: large_usd
-    drill_fields: [drill_field,average_revenue_per_user]
+    # drill_fields: [drill_field,average_revenue_per_user]
   }
 
   measure: average_ad_revenue_per_user {
@@ -612,7 +629,7 @@ view: raw_events {
     type: number
     sql: 1.0 * ${total_ad_revenue} / NULLIF(${number_of_users},0) ;;
     value_format_name: large_usd
-    drill_fields: [drill_field,average_revenue_per_user]
+    # drill_fields: [drill_field,average_revenue_per_user]
   }
 
   measure: average_iap_revenue_per_user {
@@ -622,7 +639,7 @@ view: raw_events {
     type: number
     sql: 1.0 * ${total_iap_revenue} / NULLIF(${number_of_users},0) ;;
     value_format_name: large_usd
-    drill_fields: [drill_field,average_revenue_per_user]
+    # drill_fields: [drill_field,average_revenue_per_user]
   }
 
   measure: total_d1_revenue {
@@ -638,7 +655,7 @@ view: raw_events {
       field: days_since_user_signup
       value: ">0"
     }
-    drill_fields: [drill_field,total_d1_revenue]
+    # drill_fields: [drill_field,total_d1_revenue]
     value_format_name: large_usd
   }
 
@@ -648,7 +665,7 @@ view: raw_events {
     value_format_name: large_usd
     type: number
     sql: 1.0 * ${total_d1_revenue}/ NULLIF(${d1_retained_users},0);;
-    drill_fields: [drill_field,d1_revenue_per_retained_user]
+    # drill_fields: [drill_field,d1_revenue_per_retained_user]
   }
 
   measure: total_d7_revenue {
@@ -664,7 +681,7 @@ view: raw_events {
       field: days_since_user_signup
       value: ">7"
     }
-    drill_fields: [drill_field,total_d7_revenue]
+    # drill_fields: [drill_field,total_d7_revenue]
     value_format_name: large_usd
   }
 
@@ -674,7 +691,7 @@ view: raw_events {
     value_format_name: large_usd
     type: number
     sql: 1.0 * ${total_d7_revenue}/ NULLIF(${d7_retained_users},0);;
-    drill_fields: [drill_field,d7_revenue_per_retained_user]
+    # drill_fields: [drill_field,d7_revenue_per_retained_user]
   }
 
   measure: total_d14_revenue {
@@ -690,7 +707,7 @@ view: raw_events {
       field: days_since_user_signup
       value: ">14"
     }
-    drill_fields: [drill_field,total_d14_revenue]
+    # drill_fields: [drill_field,total_d14_revenue]
     value_format_name: large_usd
   }
 
@@ -700,7 +717,7 @@ view: raw_events {
     value_format_name: large_usd
     type: number
     sql: 1.0 * ${total_d14_revenue}/ NULLIF(${d14_retained_users},0);;
-    drill_fields: [drill_field,d14_revenue_per_retained_user]
+    # drill_fields: [drill_field,d14_revenue_per_retained_user]
   }
 
   measure: total_d30_revenue {
@@ -716,8 +733,24 @@ view: raw_events {
       field: days_since_user_signup
       value: ">30"
     }
-    drill_fields: [drill_field,total_d30_revenue]
+    # drill_fields: [drill_field,total_d30_revenue]
     value_format_name: large_usd
+    link: {
+      label: "Breakdown by Country"
+      url: "{{link}}&fields=events.country,events.total_d30_revenue"
+    }
+    link: {
+      label: "Breakdown by Game"
+      url: "{{link}}&fields=events.game_name,events.total_d30_revenue"
+    }
+    link: {
+      label: "Breakdown by Game Version"
+      url: "{{link}}&fields=events.game_version,events.total_d30_revenue"
+    }
+    link: {
+      label: "Breakdown by Device Platform"
+      url: "{{link}}&fields=events.device_platform,events.total_d30_revenue"
+    }
   }
 
   measure: d30_revenue_per_retained_user {
@@ -726,7 +759,7 @@ view: raw_events {
     value_format_name: large_usd
     type: number
     sql: 1.0 * ${total_d30_revenue}/ NULLIF(${d30_retained_users},0);;
-    drill_fields: [drill_field,d30_revenue_per_retained_user]
+    # drill_fields: [drill_field,d30_revenue_per_retained_user]
   }
 
   ### For Calculating User Fact Table with Native Derived Table
