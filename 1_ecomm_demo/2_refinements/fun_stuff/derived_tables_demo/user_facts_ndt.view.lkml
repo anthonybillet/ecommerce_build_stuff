@@ -7,8 +7,12 @@ view: user_facts_ndt {
       column: order_count {}
       column: total_gross_margin {}
       # bind_all_filters: yes
+      # bind_filters: {
+      #   from_field:
+      #   to_field:
+      # }
     }
-    # datagroup_trigger: ecommerce_etl_modified
+    datagroup_trigger: ecommerce_etl_modified
     # persist_for: "24 hours"
   }
   dimension: user_id {

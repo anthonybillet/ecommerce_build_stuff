@@ -15,7 +15,7 @@ view: +products {
   }
 
   dimension: item_name {
-    sql: TRIM(${EXTENDED}) ;;
+    sql: TRIM(${name}) ;;
     drill_fields: [id]
   }
 
