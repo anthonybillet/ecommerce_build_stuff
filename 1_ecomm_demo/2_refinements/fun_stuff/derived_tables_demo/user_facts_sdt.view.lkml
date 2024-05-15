@@ -9,9 +9,9 @@ view: user_facts_sdt {
       FROM `looker-private-demo.ecomm.order_items`  AS order_items
       FULL OUTER JOIN `looker-private-demo.ecomm.inventory_items`  AS inventory_items ON inventory_items.id = order_items.inventory_item_id
       LEFT JOIN `looker-private-demo.ecomm.users`  AS users ON order_items.user_id = users.id
-       {% if users.state._is_filtered %}
-        WHERE users.state IN ({{ _filters['users.state'] | sql_quote }})
-       {% endif %}
+   --    {% if users.state._is_filtered %}
+   --     WHERE users.state IN ({{ _filters['users.state'] | sql_quote }})
+  --     {% endif %}
       GROUP BY
           1
       ;;
