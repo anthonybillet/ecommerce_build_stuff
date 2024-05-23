@@ -19,6 +19,7 @@ explore: order_items {
   }
 
   join: distribution_centers {
+    required_access_grants: [can_see_sensitive_data]
     view_label: "Distribution Center"
     type: left_outer
     sql_on: ${distribution_centers.id} = ${inventory_items.product_distribution_center_id} ;;

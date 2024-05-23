@@ -26,6 +26,7 @@ view: users {
     sql: ${TABLE}.created_at ;;
   }
   dimension: email {
+    required_access_grants: [can_see_sensitive_data]
     type: string
     sql: ${TABLE}.email ;;
   }
@@ -132,6 +133,7 @@ view: +users {
   #### Custom Dimensions ####
 
   dimension: name {
+    required_access_grants: [can_see_sensitive_data]
     label: "Name"
     sql: concat(${first_name}, ' ', ${last_name}) ;;
   }
