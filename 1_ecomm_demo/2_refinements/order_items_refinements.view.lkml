@@ -84,7 +84,7 @@ view: +order_items {
     description: "Profit after subtracting the cost of the item"
     type: number
     value_format_name: usd
-    sql: 1.2* ${sale_price} - ${inventory_items.cost};;
+    sql: 3*${sale_price} - ${inventory_items.cost};;
   }
 
   dimension: item_gross_margin_percentage {
