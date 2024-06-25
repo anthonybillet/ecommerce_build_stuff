@@ -9,7 +9,7 @@ view: order_items {
   }
   dimension_group: created {
     type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
+    timeframes: [raw, time, date, week, month, day_of_week, quarter, year]
     sql: ${TABLE}.created_at ;;
   }
   dimension_group: delivered {
@@ -45,8 +45,10 @@ view: order_items {
     sql: ${TABLE}.shipped_at ;;
   }
   dimension: status {
+    label: "Extra Explore Details Here"
     type: string
     sql: ${TABLE}.status ;;
+    html: <a href = "/explore/thelook/affinity" > Click Here {{value}} </a> ;;
   }
   dimension: user_id {
     type: number
@@ -61,13 +63,13 @@ view: order_items {
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-	id,
-	users.last_name,
-	users.id,
-	users.first_name,
-	inventory_items.id,
-	inventory_items.product_name
-	]
+  id,
+  users.last_name,
+  users.id,
+  users.first_name,
+  inventory_items.id,
+  inventory_items.product_name
+  ]
   }
 
 }
