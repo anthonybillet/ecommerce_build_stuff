@@ -1,4 +1,6 @@
 include: "/1_ecomm_demo/1_base_dont_edit/order_items.view.lkml"
+
+include: "/1_ecomm_demo/5_other/value_formats.lkml"
 view: +order_items {
 
   ########## Base Dimension Refinements ##########
@@ -149,7 +151,8 @@ view: +order_items {
     label: "Total Sale Price"
     description: "Total revenue from order items"
     type: sum
-    value_format_name: usd
+    # value_format_name: usd
+    value_format_name: big_money
     sql: ${sale_price} ;;
     drill_fields: [detail*]
   }
