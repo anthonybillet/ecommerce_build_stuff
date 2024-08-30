@@ -45,8 +45,33 @@ view: +order_items {
 
   dimension_group: created {
     description: "Date and time the item was added to the order"
-    timeframes: [time, hour, date, week, month, year, hour_of_day, day_of_week, month_num, raw, week_of_year,month_name]
+    timeframes: [time, hour, date, week, month, year, hour_of_day, day_of_week, month_num, raw, week_of_year,month_name, time_of_day]
   }
+
+  dimension: created_time_of_day_am_pm {
+    group_label: "Created Date"
+    label: "Time of Day (AM/PM)"
+    type: string
+    order_by_field: created_time_of_day
+    sql: format_time('%I:%M %p', parse_time('%H:%M', ${created_time_of_day})) ;;
+  }
+
+  dimension: created_hour_of_day_am_pm {
+    group_label: "Created Date"
+    label: "Hour of Day (AM/PM)"
+    type: string
+    order_by_field: created_hour_of_day
+    sql: format_time('%I:%M %p', parse_time('%H', CAST(${created_hour_of_day} AS string))) ;;
+  }
+
+  dimension: created_time_am_pm {
+    group_label: "Created Date"
+    label: "Time (AM/PM)"
+    type: string
+    order_by_field: created_hour_of_day
+    sql: format_time('%I:%M %p', parse_time('%H', CAST(${created_hour_of_day} AS string))) ;;
+  }
+
 
   dimension: status {
     description: "Current status of the order item (Processing, Shipped, etc.)"
