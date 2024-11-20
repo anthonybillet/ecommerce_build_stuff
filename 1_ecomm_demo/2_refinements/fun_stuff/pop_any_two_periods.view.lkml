@@ -10,12 +10,14 @@ view: pop_any_two_periods {
     type: date
     label: "Select Period"
     description: "Select the 1st date range you are interested in comparing.  Comparison and Selected Periods Must not Overlap. Make sure any other filter on Date covers this period, or is removed."
+    sql: ${order_items.created_raw} BETWEEN ${earliest_selected_date}  AND ${latest_selected_date} ;;
   }
 
   filter: compare_period {
     type: date
     label: "Compare Period"
     description: "Select the 2nd date range you are interested in Comparing with your Selected Period. Comparison and Selected Period Must not Overlap. Make sure any other filter on Date covers this period, or is removed."
+    sql: ${order_items.created_raw} BETWEEN ${earliest_selected_date}  AND ${latest_selected_date} ;;
   }
 
   # this dimension allows us to create a field we can group by to show measure values for a specific date field during the two different periods.
@@ -60,6 +62,18 @@ view: pop_any_two_periods {
     hidden: yes
     sql_start: {% date_start compare_period %} ;;
     sql_end:  {% date_end compare_period %};;
+  }
+
+  dimension: earliest_selected_date {
+    hidden: yes
+    type: string
+    sql: CASE WHEN {% date_start compare_period %} <= {% date_start select_period %} THEN {% date_start compare_period %} ELSE {% date_start select_period %} END ;;
+  }
+
+  dimension: latest_selected_date {
+    hidden: yes
+    type: string
+    sql: CASE WHEN {% date_end compare_period %} >= {% date_end select_period %} THEN {% date_end compare_period %} ELSE {% date_end select_period %} END ;;
   }
 
   dimension: selected_period {

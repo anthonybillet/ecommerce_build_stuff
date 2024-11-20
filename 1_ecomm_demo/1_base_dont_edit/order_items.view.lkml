@@ -1,5 +1,5 @@
 view: order_items {
-  sql_table_name: `looker-private-demo.ecomm.order_items` ;;
+  sql_table_name: `ant-billet-looker-core-argolis.thelook_ecomm.order_items` ;;
   drill_fields: [id]
 
   dimension: id {
@@ -14,9 +14,7 @@ view: order_items {
   }
   dimension_group: delivered {
     type: time
-    timeframes: [raw, date, week, month, quarter, year]
-    convert_tz: no
-    datatype: date
+    timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.delivered_at ;;
   }
   dimension: inventory_item_id {
@@ -26,6 +24,10 @@ view: order_items {
   dimension: order_id {
     type: number
     sql: ${TABLE}.order_id ;;
+  }
+  dimension: product_id {
+    type: number
+    sql: ${TABLE}.product_id ;;
   }
   dimension_group: returned {
     type: time
@@ -38,9 +40,7 @@ view: order_items {
   }
   dimension_group: shipped {
     type: time
-    timeframes: [raw, date, week, month, quarter, year]
-    convert_tz: no
-    datatype: date
+    timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.shipped_at ;;
   }
   dimension: status {
