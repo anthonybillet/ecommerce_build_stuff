@@ -5,6 +5,7 @@ view: matches {
   sql_table_name: `ant-billet-looker-core-argolis.sample_data.matches` ;;
 
   dimension_group: date {
+    label: "Match"
     type: time
     description: "%E4Y-%m-%d"
     timeframes: [raw, date, week, month, quarter, year]
@@ -27,4 +28,6 @@ view: matches {
   measure: count {
     type: count
   }
+
+  drill_fields: [match,winner,loser,date_date]
 }
