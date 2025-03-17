@@ -72,7 +72,6 @@ view: +order_items {
     sql: format_time('%I:%M %p', parse_time('%H', CAST(${created_hour_of_day} AS string))) ;;
   }
 
-
   dimension: status {
     description: "Current status of the order item (Processing, Shipped, etc.)"
   }

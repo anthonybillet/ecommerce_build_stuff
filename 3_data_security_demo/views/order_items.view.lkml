@@ -1,5 +1,6 @@
 view: order_items {
   sql_table_name: `ant-billet-looker-core-argolis.thelook_ecomm.order_items` ;;
+  # sql_table_name: `ant-billet-looker-core-argolis.{{_user_attributes['customer_id']}}.order_items` ;;
   drill_fields: [id]
 
   dimension: id {
