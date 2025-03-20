@@ -1,6 +1,6 @@
 ---
 - dashboard: business_pulse_dev
-  title: Business Pulse Prod Demo
+  title: Business Pulse
   layout: newspaper
   preferred_viewer: dashboards
   description: ''
@@ -157,7 +157,7 @@
     name: Orders by Day and Category
     model: thelook
     explore: order_items
-    type: looker_area
+    type: looker_column
     fields: [products.category, order_items.count, order_items.created_date]
     pivots: [products.category]
     fill_fields: [order_items.created_date]
@@ -190,11 +190,13 @@
     label_density: 25
     x_axis_scale: auto
     y_axis_combined: true
-    show_null_points: true
-    interpolation: monotone
+    ordering: none
+    show_null_labels: false
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
+    show_null_points: true
+    interpolation: monotone
     color_application:
       collection_id: google
       palette_id: google-categorical-0
