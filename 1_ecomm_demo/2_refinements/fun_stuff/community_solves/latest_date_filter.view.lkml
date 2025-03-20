@@ -11,12 +11,13 @@ view: +order_items {
     sql: CASE
               WHEN ${created_date} = (SELECT MAX(${created_date})
                                       FROM `thelook_ecomm.order_items` AS order_items)
-                THEN ' Latest Order Date'
+                THEN 'Latest Order Date'
               ELSE CAST(${created_date} as string)
         END ;;
   }
 
   dimension: date_sorter {
+    hidden: yes
     type: number
     sql: DATE_DIFF( ${created_date} , '1900-01-01', DAY) * -1 ;;
   }

@@ -151,6 +151,7 @@ view: +order_items {
   measure: order_count {
     description: "# of orders"
     type: count_distinct
+    approximate: yes
     drill_fields: [detail*]
     sql: ${order_id};;
   }
