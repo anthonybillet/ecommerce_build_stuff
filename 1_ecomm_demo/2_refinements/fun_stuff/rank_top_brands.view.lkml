@@ -1,4 +1,5 @@
 view: rank_top_brands {
+  view_label: "Z) Rank Top Brands"
 
   derived_table: {
     explore_source: order_items {
