@@ -1,5 +1,5 @@
 view: order_items {
-  sql_table_name: `ant-billet-looker-core-argolis.thelook_ecomm.order_items` ;;
+  sql_table_name: `looker-private-demo.ecomm.order_items` ;;
   drill_fields: [id]
 
   dimension: id {

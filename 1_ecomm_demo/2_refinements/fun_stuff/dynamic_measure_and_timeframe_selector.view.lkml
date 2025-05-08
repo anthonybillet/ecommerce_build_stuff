@@ -1,5 +1,6 @@
 include: "/1_ecomm_demo/1_base_dont_edit/order_items.view.lkml"
 include: "/1_ecomm_demo/2_refinements/order_items_refinements.view.lkml"
+# Dashboard: https://7d9da728-3eaf-4944-965c-d1d56538803c.looker.app/dashboards/0iiuwmWhjnSK67IrR9wHKG
 view: +order_items {
 
   parameter: measure_selector {
