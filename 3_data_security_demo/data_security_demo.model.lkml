@@ -9,18 +9,6 @@ access_grant: can_see_sensitive_data {
   allowed_values: ["Yes"]
 }
 
-test: historic_revenue_is_accurate {
-  explore_source:  order_items {
-    column:  total_sale_price {
-      field:  order_items.total_sale_price
-    }
-    filters: [order_items.created_date:  "2021"]
-  }
-  assert:  revenue_is_expected_value {
-    expression: round(${order_items.total_sale_price},0) = 21983 ;;
-  }
-}
-
 explore: order_items {
   label: "Orders, Items and Users (Data Security)"
   view_name: order_items
@@ -58,5 +46,17 @@ explore: order_items {
     type: left_outer
     relationship: many_to_one
     sql_on: ${products.id} = ${inventory_items.product_id} ;;
+  }
+}
+
+test: historic_revenue_is_accurate {
+  explore_source:  order_items {
+    column:  total_sale_price {
+      field:  order_items.total_sale_price
+    }
+    filters: [order_items.created_date:  "2021"]
+  }
+  assert:  revenue_is_expected_value {
+    expression: round(${order_items.total_sale_price},0) = 21983 ;;
   }
 }
