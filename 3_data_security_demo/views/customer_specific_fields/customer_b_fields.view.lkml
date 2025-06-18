@@ -2,7 +2,7 @@ include: "/3_data_security_demo/views/**.view.lkml"
 
 access_grant: customer_b_custom_fields {
   user_attribute: customer_group
-  allowed_values: ["Customer_B","Admin"]
+  allowed_values: ["Customer_B: Volcom","Admin"]
 }
 
 view: +order_items {
