@@ -156,6 +156,22 @@ view: +order_items {
     sql: ${order_id};;
   }
 
+  measure: count_distinct_months {
+    type: count_distinct
+    sql: ${created_month} ;;
+    hidden: no
+  }
+
+  measure: average_orders_per_month {
+    type: number
+    value_format_name: decimal_1
+    sql: 1.0*${order_count} / NULLIF(${count_distinct_months},0) ;;
+  }
+
+  filter: end_date {
+    type: date
+  }
+
   measure: average_days_to_process {
     label: "Average Days to Process"
     description: "Average time it takes to process an order"

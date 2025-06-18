@@ -1,6 +1,6 @@
 connection: "argolis"
 
-include: "/3_data_security_demo/views/*.view.lkml"
+include: "/3_data_security_demo/views/**/*.view.lkml"
 
 label: "3) Data Security Demo"
 
