@@ -13,8 +13,9 @@ explore: order_items {
   label: "Orders, Items and Users (Data Security)"
   view_name: order_items
 
+  #row level security: match a user attribute value to a column value in the data, blocking them from seeing rows where they don't match:
   access_filter: {
-    user_attribute: customer_id
+    user_attribute: customer_id_row_level
     field: products.brand
   }
 
