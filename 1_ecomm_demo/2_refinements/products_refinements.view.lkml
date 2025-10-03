@@ -45,10 +45,6 @@ view: +products {
     sql: TRIM(${EXTENDED}) ;;
   }
 
-  dimension: sku {
-    label: "SKU"
-  }
-
   dimension: distribution_center_id {
     label: "Distribution Center ID"
     type: number
