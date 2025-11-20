@@ -48,6 +48,14 @@ view: +order_items {
     timeframes: [time, hour, date, week, month, year, hour_of_day, day_of_week, month_num, raw, week_of_year,month_name, time_of_day]
   }
 
+  dimension: created_days_ago {
+    group_label: "Created Date"
+    label: "Created Days Ago"
+    group_item_label: "Days Ago"
+    type: number
+    sql: DATE_DIFF(CURRENT_DATE(), DATE(${created_raw}), DAY) ;;
+  }
+
   dimension: created_time_of_day_am_pm {
     group_label: "Created Date"
     label: "Time of Day (AM/PM)"
