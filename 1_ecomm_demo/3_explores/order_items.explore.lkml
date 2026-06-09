@@ -56,4 +56,10 @@ explore: order_items {
     relationship: one_to_one
     sql_on: ${users.id} = ${user_facts_sdt.user_id} ;;
   }
+
+  join: ndt_max_volume {
+    type: left_outer
+    sql_on: 1=1 ;;
+    relationship: many_to_one
+  }
 }

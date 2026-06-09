@@ -7,7 +7,7 @@ explore: dynamic_view {
   always_filter: {
     filters: [dynamic_view.table_selector: "Users"]
   }
-  fields: [ALL_FIELDS*,-order_items.gross_margin,-order_items.average_spend_per_user]
+  fields: [ALL_FIELDS*,-order_items.gross_margin,-order_items.average_spend_per_user,-order_items.tier_base_scale,-order_items.month_for_filter]
   join: order_items {
     type: left_outer
     relationship: one_to_many
